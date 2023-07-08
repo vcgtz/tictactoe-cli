@@ -2,7 +2,7 @@ class TicTacToe:
     def __init__(self):
         self.players = ['X', 'O']
         self.current_player = 0
-        self.board = [['-'.center(5), '-'.center(5), '-'.center(5)] for _ in range(3)]
+        self.board = [['-', '-', '-'] for _ in range(3)]
         self.winner = None
 
     def get_current_player(self):
@@ -30,7 +30,7 @@ class TicTacToe:
             print(f'{str(row+1)}'.ljust(4), end='')
 
             for column in self.board[row]:
-                print(f'{column}'.ljust(5), end='')
+                print(f'{column}'.center(5).ljust(5), end='')
             print('')
         
         print()
@@ -72,10 +72,10 @@ class TicTacToe:
         self.current_player = 1 if self.current_player == 0 else 0
 
     def is_cell_available(self, row, column):
-        return self.board[row-1][column-1] == '-'.center(5)
+        return self.board[row-1][column-1] == '-'
 
     def update_board(self, row, column):
-        self.board[row-1][column-1] = f'{self.players[self.current_player]}'.center(5)
+        self.board[row-1][column-1] = f'{self.players[self.current_player]}'
 
     def start_game(self):
         self.print_title()
