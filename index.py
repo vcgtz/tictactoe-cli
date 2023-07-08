@@ -1,8 +1,8 @@
-from src.Board import Board
+from src.TicTacToe import TicTacToe
 
 def main():
-    board = Board()
-    board.start_game()
+    ticTacToe = TicTacToe()
+    ticTacToe.start_game()
 
 if __name__ == '__main__':
     main()

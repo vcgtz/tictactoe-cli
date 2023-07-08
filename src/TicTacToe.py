@@ -1,4 +1,4 @@
-class Board:
+class TicTacToe:
     def __init__(self):
         self.players = ['X', 'O']
         self.current_player = 0
