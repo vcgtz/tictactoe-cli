@@ -5,8 +5,21 @@ class Board:
         self.board = [['-'.center(5), '-'.center(5), '-'.center(5)] for _ in range(3)]
         self.winner = None
 
+    def get_current_player(self):
+        return self.players[self.current_player]
+
+    def print_title(self):
+        print(' TIC TAC TOE '.center(40, '='))
+
+    def print_instructions(self):
+        print('Choose a column using [ROW][COLUMN] format, for instace:')
+        print('Columns 11, 13, 22, and 33 are valid.')
+        print('Columns 00, 14, a2, and 44 are invalid.')
+
     def print_board(self):
-        print('BOARD')
+        print()
+        print(f'Game Board. Current Player [{self.get_current_player()}]')
+        print('----------------------------------------')
         print(f' '.ljust(4), end='')
         print('1'.center(5), end='')
         print('2'.center(5), end='')
@@ -19,9 +32,11 @@ class Board:
             for column in self.board[row]:
                 print(f'{column}'.ljust(5), end='')
             print('')
+        
+        print()
 
     def get_input(self):
-        choose = input(f'Turn of {self.players[self.current_player]}s, [ROW][COLUMN] (Ex. 03): ')
+        choose = input(f'Player [{self.get_current_player()}], choose a column => ')
         
         try:
             chooseOptions = list(choose)
@@ -63,6 +78,8 @@ class Board:
         self.board[row-1][column-1] = f'{self.players[self.current_player]}'.center(5)
 
     def start_game(self):
+        self.print_title()
+        self.print_instructions()
         self.print_board()
 
         while not self.winner:
