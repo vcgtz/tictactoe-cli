@@ -77,6 +77,26 @@ class TicTacToe:
     def update_board(self, row, column):
         self.board[row-1][column-1] = f'{self.players[self.current_player]}'
 
+    def get_winner(self):
+        for row in self.board:
+            if all(cell == self.get_current_player() for cell in row):
+                return self.get_current_player()
+
+        for column in range(len(self.board[0])):
+            if all(self.board[row][column] == self.get_current_player() for row in range(len(self.board))):
+                return self.get_current_player()
+
+        if all(self.board[i][i] == self.get_current_player() for i in range(len(self.board))) or \
+            all(self.board[i][len(self.board) - i - 1] == self.get_current_player() for i in range(len(self.board))):
+            return self.get_current_player()
+
+    def is_tie(self):
+        for row in self.board:
+            if '-' in row:
+                return False
+
+        return True
+
     def start_game(self):
         self.print_title()
         self.print_instructions()
@@ -87,4 +107,18 @@ class TicTacToe:
 
             self.update_board(row, column)
             self.print_board()
+
+            self.winner = self.get_winner()
+            if self.winner:
+                print()
+                print(f'THE WINNER IS: {self.winner}')
+                print()
+                break
+
+            if self.is_tie():
+                print()
+                print('IT IS A TIE, NO WINNER')
+                print()
+                break
+
             self.change_player()
